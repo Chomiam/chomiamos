@@ -1,46 +1,20 @@
 #!/bin/bash
 set -e
 
-echo "==> Building Calamares from source..."
+echo "==> Using Calamares from AUR (already built)..."
 
-# Install build dependencies
-echo "==> Installing build dependencies..."
-sudo pacman -S --needed --noconfirm \
-    base-devel \
-    cmake \
-    extra-cmake-modules \
-    qt6-base \
-    qt6-declarative \
-    qt6-svg \
-    qt6-tools \
-    qt6-translations \
-    kconfig \
-    kcoreaddons \
-    kcrash \
-    kdbusaddons \
-    ki18n \
-    kiconthemes \
-    kio \
-    kparts \
-    kpmcore \
-    kservice \
-    kwidgetsaddons \
-    libpwquality \
-    polkit-qt6 \
-    solid \
-    boost \
-    yaml-cpp \
-    icu \
-    hwdata \
-    squashfs-tools \
-    git
-
-# Build the package
-echo "==> Building package..."
-makepkg -sf --noconfirm
-
-# Move package to cho-repo
-echo "==> Moving package to cho-repo..."
-mv *.pkg.tar.zst ../cho-repo/
-
-echo "==> Calamares built successfully!"
+# Check if package exists in cho-repo/x86_64
+if ls ../cho-repo/x86_64/calamares-git-*.pkg.tar.zst 1> /dev/null 2>&1; then
+    echo "==> Calamares package found in cho-repo/x86_64!"
+    echo "==> Calamares ready!"
+else
+    # If not found in x86_64, check if it's in the root and needs to be moved
+    if ls ../cho-repo/calamares-git-*.pkg.tar.zst 1> /dev/null 2>&1; then
+        echo "==> Moving Calamares package to cho-repo directory for processing..."
+        # The create-repo.sh script will move it to x86_64
+        echo "==> Calamares ready!"
+    else
+        echo "==> Error: Calamares package not found"
+        exit 1
+    fi
+fi

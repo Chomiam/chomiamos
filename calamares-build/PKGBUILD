@@ -1,6 +1,6 @@
 # Maintainer: Chomiam <axel.valens@ik.me>
 pkgname=calamares-git
-pkgver=3.3.11
+pkgver=3.3.14.r25.g95aa33fd2
 pkgrel=1
 pkgdesc="Distribution-independent installer framework (Git version)"
 arch=('x86_64')
@@ -60,6 +60,7 @@ build() {
         -DCMAKE_BUILD_TYPE=Release \
         -DCMAKE_INSTALL_PREFIX=/usr \
         -DCMAKE_INSTALL_LIBDIR=lib \
+        -DWITH_QT6=ON \
         -DSKIP_MODULES="webview interactiveterminal initramfs \
                         initramfscfg dracut dracutlukscfg \
                         dummycpp dummyprocess dummypython \

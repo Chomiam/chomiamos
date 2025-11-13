@@ -152,6 +152,7 @@ breeze-gtk
 
 # Calamares and dependencies
 calamares-git
+ckbcomp
 boost-libs
 kconfig
 kcoreaddons

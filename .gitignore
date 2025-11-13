@@ -20,3 +20,4 @@ cho-repo/x86_64/*.files*
 .vscode/
 .idea/
 *.code-workspace
+archiso/pacman.conf.bak
