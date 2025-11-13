@@ -1,0 +1,15 @@
+# Keep the structure but ignore packages until built
+x86_64/*.pkg.tar.zst
+x86_64/*.pkg.tar.zst.sig
+x86_64/*.db
+x86_64/*.db.tar.gz
+x86_64/*.db.tar.gz.old
+x86_64/*.files
+x86_64/*.files.tar.gz
+x86_64/*.files.tar.gz.old
+
+# But keep the directory
+!x86_64/.gitkeep
+
+# Logs
+*.log
