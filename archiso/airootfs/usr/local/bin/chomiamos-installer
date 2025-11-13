@@ -1,0 +1,8 @@
+#!/bin/bash
+# ChomiamOS Installer Launcher
+
+if [ "$EUID" -ne 0 ]; then
+    pkexec env DISPLAY=$DISPLAY XAUTHORITY=$XAUTHORITY /usr/bin/calamares
+else
+    /usr/bin/calamares
+fi

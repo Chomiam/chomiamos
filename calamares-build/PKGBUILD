@@ -1,0 +1,77 @@
+# Maintainer: Chomiam <axel.valens@ik.me>
+pkgname=calamares-git
+pkgver=3.3.11
+pkgrel=1
+pkgdesc="Distribution-independent installer framework (Git version)"
+arch=('x86_64')
+url="https://calamares.io/"
+license=('GPL-3.0-or-later AND BSD-2-Clause AND CC0-1.0 AND CC-BY-4.0 AND LGPL-2.1-only AND LGPL-3.0-or-later AND MIT')
+depends=(
+    'boost-libs'
+    'hwdata'
+    'icu'
+    'kconfig'
+    'kcoreaddons'
+    'kcrash'
+    'kdbusaddons'
+    'ki18n'
+    'kiconthemes'
+    'kio'
+    'kparts'
+    'kpmcore'
+    'kservice'
+    'kwidgetsaddons'
+    'libpwquality'
+    'polkit-qt6'
+    'qt6-base'
+    'qt6-declarative'
+    'qt6-svg'
+    'qt6-tools'
+    'solid'
+    'squashfs-tools'
+    'yaml-cpp'
+)
+makedepends=(
+    'extra-cmake-modules'
+    'git'
+    'qt6-translations'
+)
+optdepends=(
+    'appstream-qt: AppStream support'
+)
+provides=('calamares')
+conflicts=('calamares')
+source=("git+https://github.com/calamares/calamares.git")
+sha256sums=('SKIP')
+
+pkgver() {
+    cd calamares
+    git describe --long --tags 2>/dev/null | sed 's/^v//;s/\([^-]*-g\)/r\1/;s/-/./g' || echo "$pkgver"
+}
+
+prepare() {
+    cd calamares
+}
+
+build() {
+    cd calamares
+
+    cmake -B build \
+        -DCMAKE_BUILD_TYPE=Release \
+        -DCMAKE_INSTALL_PREFIX=/usr \
+        -DCMAKE_INSTALL_LIBDIR=lib \
+        -DSKIP_MODULES="webview interactiveterminal initramfs \
+                        initramfscfg dracut dracutlukscfg \
+                        dummycpp dummyprocess dummypython \
+                        dummypythonqt services-openrc"
+
+    cmake --build build
+}
+
+package() {
+    cd calamares
+    DESTDIR="$pkgdir" cmake --install build
+
+    # Install license files
+    install -Dm644 LICENSE -t "$pkgdir/usr/share/licenses/$pkgname/"
+}

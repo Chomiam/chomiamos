@@ -1,0 +1,22 @@
+# Build artifacts
+archiso/work/
+archiso/out/
+calamares-build/calamares/
+calamares-build/src/
+calamares-build/pkg/
+calamares-build/*.pkg.tar.zst
+calamares-build/*.log
+cho-repo/x86_64/*.pkg.tar.zst
+cho-repo/x86_64/*.db*
+cho-repo/x86_64/*.files*
+
+# Temporary files
+*.log
+*~
+.*.swp
+*.tmp
+
+# IDE
+.vscode/
+.idea/
+*.code-workspace
