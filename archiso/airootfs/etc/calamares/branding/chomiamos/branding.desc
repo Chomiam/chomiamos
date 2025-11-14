@@ -1,0 +1,33 @@
+---
+componentName:  chomiamos
+
+# Shown in the welcome page
+strings:
+    productName:         ChomiamOS
+    shortProductName:    ChomiamOS
+    version:             2025.11
+    shortVersion:        2025.11
+    versionedName:       ChomiamOS 2025.11
+    shortVersionedName:  ChomiamOS 2025.11
+    bootloaderEntryName: ChomiamOS
+    productUrl:          https://github.com/chomiam/chomiamos
+    supportUrl:          https://github.com/chomiam/chomiamos/issues
+    knownIssuesUrl:      https://github.com/chomiam/chomiamos/issues
+    releaseNotesUrl:     https://github.com/chomiam/chomiamos/releases
+
+images:
+    productLogo:         "logo.png"
+    productIcon:         "logo.png"
+    productWelcome:      "welcome.png"
+
+# Stylesheet
+style:
+   sidebarBackground:    "#2c3e50"
+   sidebarText:          "#ffffff"
+   sidebarTextSelect:    "#3498db"
+   sidebarTextHighlight: "#3498db"
+
+slideshow:               "show.qml"
+
+# Sidebar size
+slideshowAPI: 2

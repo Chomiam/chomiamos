@@ -73,6 +73,6 @@ package() {
     cd calamares
     DESTDIR="$pkgdir" cmake --install build
 
-    # Install license files
-    install -Dm644 LICENSE -t "$pkgdir/usr/share/licenses/$pkgname/"
+    # Install license files (LICENSE is in the root of the repo)
+    install -Dm644 "$srcdir/calamares/LICENSE" "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
 }

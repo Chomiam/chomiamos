@@ -9,6 +9,7 @@ calamares-build/*.log
 cho-repo/x86_64/*.pkg.tar.zst
 cho-repo/x86_64/*.db*
 cho-repo/x86_64/*.files*
+logs/
 
 # Temporary files
 *.log

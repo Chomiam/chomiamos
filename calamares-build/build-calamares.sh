@@ -1,20 +1,32 @@
 #!/bin/bash
 set -e
 
-echo "==> Using Calamares from AUR (already built)..."
+echo "==> Checking for Calamares package..."
 
-# Check if package exists in cho-repo/x86_64
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+cd "$SCRIPT_DIR"
+
+# Check if package already exists in cho-repo/x86_64 (from GitHub)
 if ls ../cho-repo/x86_64/calamares-git-*.pkg.tar.zst 1> /dev/null 2>&1; then
     echo "==> Calamares package found in cho-repo/x86_64!"
-    echo "==> Calamares ready!"
-else
-    # If not found in x86_64, check if it's in the root and needs to be moved
-    if ls ../cho-repo/calamares-git-*.pkg.tar.zst 1> /dev/null 2>&1; then
-        echo "==> Moving Calamares package to cho-repo directory for processing..."
-        # The create-repo.sh script will move it to x86_64
-        echo "==> Calamares ready!"
-    else
-        echo "==> Error: Calamares package not found"
-        exit 1
-    fi
+    echo "==> Using existing package from GitHub repository."
+    exit 0
 fi
+
+# Check if package exists in cho-repo root
+if ls ../cho-repo/calamares-git-*.pkg.tar.zst 1> /dev/null 2>&1; then
+    echo "==> Calamares package found in cho-repo root!"
+    echo "==> It will be moved to x86_64/ by create-repo.sh"
+    exit 0
+fi
+
+# If we get here, the package is missing - this shouldn't happen if GitHub repo is cloned
+echo "==> WARNING: Calamares package not found!"
+echo "==> Make sure you have cloned the cho repository with:"
+echo "    cd cho-repo && git pull"
+echo ""
+echo "==> Or build it manually from AUR:"
+echo "    cd calamares-build"
+echo "    makepkg -sf"
+echo "    mv calamares-git-*.pkg.tar.zst ../cho-repo/"
+exit 1

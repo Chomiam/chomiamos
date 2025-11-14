@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Name=Install ChomiamOS
+GenericName=System Installer
+Comment=Install ChomiamOS to your computer
+Exec=/usr/local/bin/chomiamos-installer
+Icon=system-software-install
+Terminal=false
+Categories=System;Qt;
+X-KDE-autostart-after=panel
+X-KDE-StartupNotify=true
